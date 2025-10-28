@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import { MyButton } from "./components/MyButton";
+import { useState } from "react";
 
 class User {
   name: string = "ethan";
@@ -11,6 +14,7 @@ export default function MyApp() {
   const user = new User();
   const loggedIn = false;
   const ok = true;
+  const [count, setCount] = useState(0);
 
   const products = [
     { title: "cabbage", isFruit: false, id: 1 },
@@ -18,10 +22,13 @@ export default function MyApp() {
     { title: "orange", isFruit: true, id: 3 },
   ];
 
+  function handleClick() {
+    setCount(count + 1);
+  }
+
   return (
     <div>
       <h1>Welcome to my app.</h1>
-      <MyButton />
       <img
         className={`border-2 w-${user.imageSize} h-${user.imageSize}`}
         src={user.imageUrl}
@@ -40,6 +47,10 @@ export default function MyApp() {
           </div>
         );
       })}
+
+      <MyButton count={count} onClick={handleClick} />
+
+      <MyButton count={count} onClick={handleClick} />
     </div>
   );
 }
